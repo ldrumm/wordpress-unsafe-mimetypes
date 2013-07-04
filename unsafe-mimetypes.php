@@ -12,7 +12,7 @@ License: zlib
 
 function unsafe_mime_list_types()
 {
-	return 'your current allowed filetypes:<em>' . get_option('unsafe_mime_settings') . '</em>';
+	return 'Your current allowed filetypes:<em>' . get_option('unsafe_mime_settings') . '</em>';
 }
 
 function unsafe_mime_commit_types()
@@ -76,7 +76,7 @@ function register_mysettings()
 	    'test-setting-admin');
 	add_settings_field(
 	    'mime_list', 
-	    'List of file extensions (no dot, comma separated)', 
+	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
 	    'test-setting-admin',
 	    'setting_section_id');
