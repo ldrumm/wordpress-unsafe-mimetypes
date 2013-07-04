@@ -20,8 +20,9 @@ function unsafe_mime_commit_types()
 	if(isset($_POST['mime_list']))
 	{
 		echo 'updating database with '. $_POST['mime_list'];
+		add_option('unsafe_mime_settings', $_POST['mime_list']);
 	}
-	add_option('unsafe_mime_settings', $_POST['mime_list']);
+	
 }
 
 function custom_upload_mimes()
