@@ -14,11 +14,11 @@ License: zlib
 <?php
 /*Add the settings options to the wordpress admin menu*/
 
-#function unsafe_mime_list_types()
-#{
-#	
-#echo 'here are the settings yeah';
-#}
+function unsafe_mime_list_types()
+{
+	
+echo 'here are the settings yeah';
+}
 
 #function unsafe_mime_commit_types()
 #{
@@ -63,6 +63,7 @@ function unsafe_mime_settings_page()
 function print_section_info()
 {
 	echo 'Configure which mimetypes you want to be able to upload below...';
+	echo 'The current list of custom mimetypes is as follows<br/>'.unsafe_mime_list_types();
 
 }
 
