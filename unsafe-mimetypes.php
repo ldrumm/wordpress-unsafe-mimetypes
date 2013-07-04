@@ -42,7 +42,7 @@ function unsafe_mime_settings_page()
 {
 	if( isset($_POST[ 'mime_list' ])){
 		print_r($_POST);
-		echo " WAS  posted"
+		echo " WAS  posted";
 	}
 	?>
 	
