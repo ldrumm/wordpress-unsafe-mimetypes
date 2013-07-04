@@ -40,8 +40,11 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	
+	if($_POST){
+		print_r($post);
+	}
 	?>
+	
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2>	
