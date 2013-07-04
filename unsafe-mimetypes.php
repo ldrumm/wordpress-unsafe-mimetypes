@@ -84,7 +84,7 @@ function register_mysettings()
 	);	
 		
 	add_settings_field(
-	    'some_id', 
+	    'mime_list', 
 	    'List of file extensions (no dot, comma separated)', 
 	    'create_an_id_field', 
 	    'test-setting-admin',
