@@ -43,6 +43,7 @@ function my_plugin_menu()
 }
 
 function unsafe_mime_settings_page()
+{
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
