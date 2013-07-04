@@ -10,3 +10,34 @@ License: zlib
 */
 ?>
 
+
+<?php
+/*Add the settings options to the wordpress admin menu*/
+
+function unsafe_mime_list_types()
+{
+
+
+}
+
+function unsafe_mime_commit_types()
+{
+
+}
+
+
+function unsafe_mime_register_types()
+{
+
+}
+
+function unsafe_mime_settings_page()
+{
+	echo 'here are the settings yeah';
+}
+
+
+add_options_page('Add custom mime types', 'mimetypes', 'Administrator', 'mimetypes-settings', 'unsafe_mime_settings_page');
+
+
+?>
