@@ -63,7 +63,7 @@ function unsafe_mime_settings_page()
 function print_section_info()
 {
 	echo 'Configure which mimetypes you want to be able to upload below...';
-	echo 'The current list of custom mimetypes is as follows<br/><br/>'.unsafe_mime_list_types();
+	echo 'The current list of custom mimetypes is as follows<br/><br/><em>'.unsafe_mime_list_types().'</em>';
 
 }
 
