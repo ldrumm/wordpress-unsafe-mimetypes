@@ -39,11 +39,17 @@ function my_plugin_menu()
 	
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
-	<form method="post" action="options.php">
+	<div class="wrap">
+	    <?php screen_icon(); ?>
+	    <h2>Settings</h2>	
+		<form method="post" action="options.php">
 	
-	<?php
-	settings_fields('unsafe-mime-group');
-	do_settings_sections('unsafe-mime-settings');
+		<?php
+		settings_fields('unsafe-mime-group');
+		do_settings_sections('unsafe-mime-settings');
+		php submit_button(); ?>
+	    </form>
+	</div>
 }
 
 function unsafe_mime_settings_page()
