@@ -40,7 +40,7 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	register_setting('unsafe-mime-group', 'custom-mime-setting');
+	
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
@@ -58,8 +58,14 @@ function unsafe_mime_settings_page()
 
 }
 
+function register_mysettings()
+{
+	register_setting('unsafe-mime-group', 'custom-mime-setting');
+}
+
 if(is_admin()){
 	add_action( 'admin_menu', 'my_plugin_menu' );
+	add_action( 'admin_init', 'register_mysettings' );
 }
 
 ?>
