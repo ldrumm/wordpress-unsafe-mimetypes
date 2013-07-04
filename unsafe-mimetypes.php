@@ -31,10 +31,7 @@ License: zlib
 #echo 'here are the settings yeah';
 #}
 
-function unsafe_mime_settings_page()
-{
-	echo 'here are the settings yeah';
-}
+
 
 function my_plugin_menu()
 {
@@ -47,6 +44,11 @@ function my_plugin_menu()
 	settings_fields( 'myoption-group' );
 }
 
+function unsafe_mime_settings_page()
+{
+	echo 'here are the settings yeah';
+	my_plugin_menu();
+}
 
 if(is_admin()){
 	add_action( 'admin_menu', 'my_plugin_menu' );
