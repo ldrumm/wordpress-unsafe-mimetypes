@@ -57,6 +57,17 @@ function unsafe_mime_settings_page()
 	<?php
 
 }
+function print_section_info()
+{
+	echo 'This is the section info unction';
+
+}
+
+function create_an_id_field()
+{
+	echo 'This is the create_an_id_field info unction';
+
+}
 
 function register_mysettings()
 {
@@ -64,14 +75,14 @@ function register_mysettings()
 	add_settings_section(
 	    'setting_section_id',
 	    'Setting',
-	    array($this, 'print_section_info'),
+	    'print_section_info',
 	    'test-setting-admin'
 	);	
 		
 	add_settings_field(
 	    'some_id', 
 	    'Some ID(Title)', 
-	    array($this, 'create_an_id_field'), 
+	    'create_an_id_field', 
 	    'test-setting-admin',
 	    'setting_section_id'			
 	);
