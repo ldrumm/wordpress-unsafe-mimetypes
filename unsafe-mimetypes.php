@@ -37,7 +37,7 @@ function unsafe_mime_settings_page()
 }
 
 
-add_options_page('Add custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
+add_options_page('addcustommimetypes', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
 
 
 ?>
