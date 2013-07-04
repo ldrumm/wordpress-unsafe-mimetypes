@@ -36,6 +36,11 @@ License: zlib
 function my_plugin_menu()
 {
 	add_options_page('Configure custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe-mime-settings');
+}
+
+function unsafe_mime_settings_page()
+{
+	
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
 	<div class="wrap">
@@ -44,22 +49,17 @@ function my_plugin_menu()
 		<form method="post" action="options.php">
 	
 	<?php
-	settings_fields('unsafe-mime-group');
-	do_settings_sections('unsafe-mime-settings');
-	submit_button(); ?>
+		settings_fields('unsafe-mime-group');
+		do_settings_sections('unsafe-mime-settings');
+		submit_button(); 
+	?>
 	    </form>
 	</div>
 	<?php
 }
 
-function unsafe_mime_settings_page()
-{
-	echo 'here are the settings syeah';
-	my_plugin_menu();
-}
-
 if(is_admin()){
-	add_action( 'admin_menu', 'unsafe_mime_settings_page' );
+	add_action( 'admin_menu', 'my_plugin_menu' );
 }
 
 ?>
