@@ -44,7 +44,7 @@ function unsafe_mime_settings_page()
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
-	    <h2>Allow Custom Mimetype Settings</h2>	
+	    <h2>Configure Custom Mimetypes</h2>	
 		<form method="post" action="options.php">
 	
 	<?php
