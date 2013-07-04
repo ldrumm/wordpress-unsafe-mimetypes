@@ -38,7 +38,7 @@ function unsafe_mime_settings_page()
 
 function my_plugin_menu()
 {
-	add_options_page('addcustommimetypes', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
+	add_options_page('Configure custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
 }
 add_action( 'admin_menu', 'my_plugin_menu' );
 
