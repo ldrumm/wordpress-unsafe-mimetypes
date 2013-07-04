@@ -35,7 +35,7 @@ License: zlib
 
 function my_plugin_menu()
 {
-	add_options_page('Configure custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
+	add_options_page('Configure custom mime types', 'Allowed mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
 }
 
 function unsafe_mime_settings_page()
