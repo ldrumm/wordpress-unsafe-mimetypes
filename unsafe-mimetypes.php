@@ -21,9 +21,9 @@ return  'here are the types yeah';
 }
 
 #function unsafe_mime_commit_types()
-#{
-#echo 'here are the settings yeah';
-#}
+{
+add_option('unsafe_mime_settings', 'none',);
+}
 
 
 #function unsafe_mime_register_types()
@@ -40,8 +40,8 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	if($_POST){
-		print_r($post);
+	if( isset($_POST[ 'mime_list' ])
+		print_r($_POST);
 	}
 	?>
 	
@@ -93,6 +93,7 @@ function register_mysettings()
 }
 
 if(is_admin()){
+	
 	add_action( 'admin_menu', 'my_plugin_menu' );
 	add_action( 'admin_init', 'register_mysettings' );
 }
