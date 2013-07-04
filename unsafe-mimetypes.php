@@ -39,7 +39,15 @@ function unsafe_mime_settings_page()
 function my_plugin_menu()
 {
 	add_options_page('Configure custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
+	settings_fields('unsafe-mime-group');
+	register_setting('unsafe-mime-group', 'custom-mime-setting');
+	?>
+	<form method="post" action="options.php">
+	<?php
+	settings_fields( 'myoption-group' );
 }
+
+
 if(is_admin()){
 	add_action( 'admin_menu', 'my_plugin_menu' );
 }
