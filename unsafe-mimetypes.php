@@ -40,7 +40,7 @@ function my_plugin_menu()
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
 	<div class="wrap">
-	    <?php screen_icon(); ?>
+#	    <?php screen_icon(); ?>
 	    <h2>Settings</h2>	
 		<form method="post" action="options.php">
 	
