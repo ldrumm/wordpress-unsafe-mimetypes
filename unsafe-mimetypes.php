@@ -29,6 +29,7 @@ function custom_upload_mimes()
 
 function my_plugin_menu()
 {
+	print_r($_POST);
 	add_options_page(
 		'Configure custom mime types', 
 		'Allowed mimetypes', 
