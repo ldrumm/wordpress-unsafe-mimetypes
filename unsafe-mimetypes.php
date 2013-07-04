@@ -40,7 +40,7 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	if( isset($_POST[ 'mime_list' ])
+	if( isset($_POST[ 'mime_list' ]))
 		print_r($_POST);
 	}
 	?>
