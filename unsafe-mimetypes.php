@@ -40,12 +40,11 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	echo 'Here are the settings yeah';
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
-	    <h2>Settings</h2>	
+	    <h2>Allow Custom Mimetype Settings</h2>	
 		<form method="post" action="options.php">
 	
 	<?php
