@@ -16,13 +16,12 @@ License: zlib
 
 function unsafe_mime_list_types()
 {
-	
-return  'here are the types yeah';
+	return 'here are the types yeah';
 }
 
 function unsafe_mime_commit_types()
 {
-add_option('unsafe_mime_settings', 'none');
+	add_option('unsafe_mime_settings', 'none');
 }
 
 
@@ -32,6 +31,7 @@ function custom_upload_mimes()
  
 function custom_upload_mimes ($existing_mimes=array() ) {
  
+ 	echo 'your current allowed filetypes:<em>'.get_option('unsafe_mime_settings').'</em>';
     // change the word forbiddenfiletype below to an extension you wish to allow
      $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
     
@@ -39,14 +39,19 @@ function custom_upload_mimes ($existing_mimes=array() ) {
     return $existing_mimes;
 }
 	
-echo 'here are the settings yeah';
+
 }
 
 
 
 function my_plugin_menu()
 {
-	add_options_page('Configure custom mime types', 'Allowed mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
+	add_options_page(
+	'Configure custom mime types', 
+	'Allowed mimetypes', 
+	'manage_options', 
+	'mimetypes-settings', 
+	'unsafe_mime_settings_page');
 }
 
 function unsafe_mime_settings_page()
