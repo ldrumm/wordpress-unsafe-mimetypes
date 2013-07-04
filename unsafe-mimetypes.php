@@ -69,7 +69,7 @@ function print_section_info()
 function create_an_id_field()
 {
 	?><input type="text" id="input_whatever_unique_id_I_want" name="array_key[some_id]" value="<?=get_option('test_some_id');?>" /><?php
-    }
+    
 
 }
 
