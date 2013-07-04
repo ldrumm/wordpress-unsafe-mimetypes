@@ -17,7 +17,7 @@ License: zlib
 function unsafe_mime_list_types()
 {
 	
-echo 'here are the settings yeah';
+echo 'here are the types yeah';
 }
 
 #function unsafe_mime_commit_types()
