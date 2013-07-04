@@ -40,7 +40,7 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	
+		echo 'Here are the settings yeah';
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
 	<div class="wrap">
@@ -56,6 +56,7 @@ function unsafe_mime_settings_page()
 	    </form>
 	</div>
 	<?php
+
 }
 
 if(is_admin()){
