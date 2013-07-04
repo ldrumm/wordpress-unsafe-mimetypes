@@ -73,13 +73,15 @@ function register_mysettings()
 	    'setting_section_id',
 	    'Setting',
 	    'print_section_info',
-	    'test-setting-admin');
+	    'test-setting-admin'
+	);
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
 	    'test-setting-admin',
-	    'setting_section_id');
+	    'setting_section_id'
+	);
 }
 
 if(is_admin()){
