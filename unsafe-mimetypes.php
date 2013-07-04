@@ -46,7 +46,7 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	echo 'here are the settings yeah';
+	echo 'here are the settings syeah';
 	my_plugin_menu();
 }
 
