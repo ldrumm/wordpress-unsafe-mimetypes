@@ -84,7 +84,7 @@ function register_mysettings()
 	    'setting_section_id'
 	);
 }
-
+print_r($_POST);
 if(is_admin()){
 	add_action('admin_menu', 'my_plugin_menu' );
 	add_action('admin_init', 'register_mysettings');
