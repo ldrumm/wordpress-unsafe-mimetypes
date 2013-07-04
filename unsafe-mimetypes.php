@@ -26,10 +26,21 @@ add_option('unsafe_mime_settings', 'none');
 }
 
 
-#function unsafe_mime_register_types()
-#{
-#echo 'here are the settings yeah';
-#}
+function custom_upload_mimes()
+{
+	
+ 
+function custom_upload_mimes ($existing_mimes=array() ) {
+ 
+    // change the word forbiddenfiletype below to an extension you wish to allow
+     $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
+    
+    // call the modified list of extensions
+    return $existing_mimes;
+}
+	
+echo 'here are the settings yeah';
+}
 
 
 
@@ -95,6 +106,7 @@ if(is_admin()){
 	
 	add_action( 'admin_menu', 'my_plugin_menu' );
 	add_action( 'admin_init', 'register_mysettings' );
+	add_filter('upload_mimes', 'custom_upload_mimes');
 }
-
+	
 ?>
