@@ -62,11 +62,11 @@ function unsafe_mime_settings_page()
 }
 function print_section_info()
 {
-	echo 'This is the section info function';
+	echo 'Configure which mimetypes you want to be able to upload below...';
 
 }
 
-function create_an_id_field()
+function create_mime_list_box()
 {
 	?><input type="text" id="mime_list" name="array_key[some_id]" value="<?=get_option('test_some_id');?>" /><?php
     
@@ -82,11 +82,10 @@ function register_mysettings()
 	    'print_section_info',
 	    'test-setting-admin'
 	);	
-		
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, comma separated)', 
-	    'create_an_id_field', 
+	    'create_mime_list_box', 
 	    'test-setting-admin',
 	    'setting_section_id'			
 	);
