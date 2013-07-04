@@ -16,7 +16,7 @@ License: zlib
 
 function unsafe_mime_list_types()
 {
-	return 'here are the types yeah';
+	return 'your current allowed filetypes:<em>'.get_option('unsafe_mime_settings').'</em>';;
 }
 
 function unsafe_mime_commit_types()
@@ -27,12 +27,8 @@ function unsafe_mime_commit_types()
 
 function custom_upload_mimes()
 {
-	
- 
- 	echo 'your current allowed filetypes:<em>'.get_option('unsafe_mime_settings').'</em>';
     // change the word forbiddenfiletype below to an extension you wish to allow
      $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
-    
     // call the modified list of extensions
     return $existing_mimes;
 }
@@ -51,14 +47,11 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-		print_r($_POST);
 	?>
-	
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2>	
 		<form method="post" action="options.php">
-	
 	<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('test-setting-admin');
@@ -67,8 +60,8 @@ function unsafe_mime_settings_page()
 	    </form>
 	</div>
 	<?php
-
 }
+
 function print_section_info()
 {
 	print_r($_POST);
