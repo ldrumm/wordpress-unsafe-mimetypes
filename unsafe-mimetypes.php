@@ -8,15 +8,11 @@ Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
 */
-?>
-
-
-<?php
 /*Add the settings options to the wordpress admin menu*/
 
 function unsafe_mime_list_types()
 {
-	return 'your current allowed filetypes:<em>'.get_option('unsafe_mime_settings').'</em>';;
+	return 'your current allowed filetypes:<em>' . get_option('unsafe_mime_settings') . '</em>';
 }
 
 function unsafe_mime_commit_types()
@@ -24,25 +20,21 @@ function unsafe_mime_commit_types()
 	add_option('unsafe_mime_settings', 'none');
 }
 
-
 function custom_upload_mimes()
 {
     // change the word forbiddenfiletype below to an extension you wish to allow
-     $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
-    // call the modified list of extensions
+    $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
     return $existing_mimes;
 }
-
-
 
 function my_plugin_menu()
 {
 	add_options_page(
-	'Configure custom mime types', 
-	'Allowed mimetypes', 
-	'manage_options', 
-	'mimetypes-settings', 
-	'unsafe_mime_settings_page');
+		'Configure custom mime types', 
+		'Allowed mimetypes', 
+		'manage_options', 
+		'mimetypes-settings', 
+		'unsafe_mime_settings_page');
 }
 
 function unsafe_mime_settings_page()
@@ -66,15 +58,12 @@ function print_section_info()
 {
 	print_r($_POST);
 	echo 'Configure which mimetypes you want to be able to upload below...';
-	echo 'The current list of custom mimetypes is as follows<br/><br/><em>'.unsafe_mime_list_types().'</em>';
-
+	echo 'The current list of custom mimetypes is as follows<br/><br/><em>' . unsafe_mime_list_types() . '</em>';
 }
 
 function create_mime_list_box()
 {
 	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings');?>" /><?php
-    
-
 }
 
 function register_mysettings()
@@ -84,21 +73,18 @@ function register_mysettings()
 	    'setting_section_id',
 	    'Setting',
 	    'print_section_info',
-	    'test-setting-admin'
-	);	
+	    'test-setting-admin');
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, comma separated)', 
 	    'create_mime_list_box', 
 	    'test-setting-admin',
-	    'setting_section_id'			
-	);
+	    'setting_section_id');
 }
 
 if(is_admin()){
-	
-	add_action( 'admin_menu', 'my_plugin_menu' );
-	add_action( 'admin_init', 'register_mysettings' );
+	add_action('admin_menu', 'my_plugin_menu' );
+	add_action('admin_init', 'register_mysettings');
 	add_filter('upload_mimes', 'custom_upload_mimes');
 }
 	
