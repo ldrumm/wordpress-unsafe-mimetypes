@@ -62,7 +62,7 @@ function unsafe_mime_settings_page()
 }
 function print_section_info()
 {
-	echo 'This is the section info unction';
+	echo 'This is the section info function';
 
 }
 
@@ -85,7 +85,7 @@ function register_mysettings()
 		
 	add_settings_field(
 	    'some_id', 
-	    'Some ID(Title)', 
+	    'List of file extensions (no dot, comma separated)', 
 	    'create_an_id_field', 
 	    'test-setting-admin',
 	    'setting_section_id'			
