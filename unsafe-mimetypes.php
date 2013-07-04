@@ -29,17 +29,12 @@ function custom_upload_mimes()
 {
 	
  
-function custom_upload_mimes($existing_mimes=array() ) {
- 
  	echo 'your current allowed filetypes:<em>'.get_option('unsafe_mime_settings').'</em>';
     // change the word forbiddenfiletype below to an extension you wish to allow
      $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
     
     // call the modified list of extensions
     return $existing_mimes;
-}
-	
-
 }
 
 
