@@ -22,7 +22,7 @@ return  'here are the types yeah';
 
 #function unsafe_mime_commit_types()
 {
-add_option('unsafe_mime_settings', 'none',);
+add_option('unsafe_mime_settings', 'none');
 }
 
 
