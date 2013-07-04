@@ -49,7 +49,7 @@ function unsafe_mime_settings_page()
 	
 	<?php
 		settings_fields('unsafe-mime-group');
-		do_settings_sections('setting_section_id');
+		do_settings_sections('test-setting-admin');
 		submit_button(); 
 	?>
 	    </form>
