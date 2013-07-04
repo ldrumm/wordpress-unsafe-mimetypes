@@ -45,7 +45,7 @@ function my_plugin_menu()
 		<form method="post" action="options.php">
 	
 	<?php
-	settings_fields('unsafe-mime-group');
+#	settings_fields('unsafe-mime-group');
 #	do_settings_sections('unsafe-mime-settings');
 	submit_button(); ?>
 	    </form>
