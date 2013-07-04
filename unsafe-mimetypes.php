@@ -39,9 +39,8 @@ function my_plugin_menu()
 	settings_fields('unsafe-mime-group');
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	?>
-	<form method="posdt" action="options.php">
+	<form method="post" action="options.php">
 	<?php
-	settings_fields( 'myoption-group' );
 }
 
 function unsafe_mime_settings_page()
