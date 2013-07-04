@@ -50,6 +50,7 @@ function my_plugin_menu()
 		php submit_button(); ?>
 	    </form>
 	</div>
+	<?php
 }
 
 function unsafe_mime_settings_page()
