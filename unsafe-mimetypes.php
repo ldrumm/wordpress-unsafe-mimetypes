@@ -60,7 +60,7 @@ function unsafe_mime_settings_page()
 }
 
 if(is_admin()){
-	add_action( 'admin_menu', 'my_plugin_menu' );
+	add_action( 'admin_menu', 'unsafe_mime_settings_page' );
 }
 
 ?>
