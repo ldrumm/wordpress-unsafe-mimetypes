@@ -17,7 +17,11 @@ function unsafe_mime_list_types()
 
 function unsafe_mime_commit_types()
 {
-	add_option('unsafe_mime_settings', 'none');
+	if(isset($_POST['mime_list']))
+	{
+		echo 'updating database with '. $_POST['mime_list'];
+	}
+	add_option('unsafe_mime_settings', $_POST['mime_list']);
 }
 
 function custom_upload_mimes()
@@ -29,7 +33,6 @@ function custom_upload_mimes()
 
 function my_plugin_menu()
 {
-	print_r($_POST);
 	add_options_page(
 		'Configure custom mime types', 
 		'Allowed mimetypes', 
@@ -39,7 +42,6 @@ function my_plugin_menu()
 }
 
 function unsafe_mime_settings_page()
-{print_r($_POST);
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
@@ -57,7 +59,6 @@ function unsafe_mime_settings_page()
 
 function print_section_info()
 {
-	print_r($_POST);
 	echo 'Configure which mimetypes you want to be able to upload below...';
 	echo 'The current list of custom mimetypes is as follows<br/><br/><em>' . unsafe_mime_list_types() . '</em>';
 }
@@ -84,7 +85,6 @@ function register_mysettings()
 	    'setting_section_id'
 	);
 }
-print_r($_POST);
 if(is_admin()){
 	add_action('admin_menu', 'my_plugin_menu' );
 	add_action('admin_init', 'register_mysettings');
