@@ -1,47 +1,74 @@
 <?php
-/*
-Plugin Name: wordpress unsafe mimetypes
-Plugin URI: http://redmine.lukedrummond.net/projects/wp-unsafe-mimetypes
-Description: Allows users to add file types to the whitelist of allowed media formats.  This  is especially useful if you wish to distribute binaries, or specialist media formats (i.e. not just mp3, jpg and pdf)
-Version: 0.0.1
-Author: Luke Drummond
-Author URI: https://lukedrummond.net
-License: zlib
-*/
-?>
+class wctest{
+    public function __construct(){
+        if(is_admin()){
+	    add_action('admin_menu', array($this, 'add_plugin_page'));
+	    add_action('admin_init', array($this, 'page_init'));
+	}
+    }
+	
+    public function add_plugin_page(){
+        // This page will be under "Settings"
+	add_options_page('Settings Admin', 'Settings', 'manage_options', 'test-setting-admin', array($this, 'create_admin_page'));
+    }
 
-
-<?php
-/*Add the settings options to the wordpress admin menu*/
-
-#function unsafe_mime_list_types()
-#{
-#	
-#echo 'here are the settings yeah';
-#}
-
-#function unsafe_mime_commit_types()
-#{
-#echo 'here are the settings yeah';
-#}
-
-
-#function unsafe_mime_register_types()
-#{
-#echo 'here are the settings yeah';
-#}
-
-function unsafe_mime_settings_page()
-{
-	echo 'here are the settings yeah';
+    public function create_admin_page(){
+        ?>
+	<div class="wrap">
+	    <?php screen_icon(); ?>
+	    <h2>Settings</h2>			
+	    <form method="post" action="options.php">
+	        <?php
+                    // This prints out all hidden setting fields
+		    settings_fields('test_option_group');	
+		    do_settings_sections('test-setting-admin');
+		?>
+	        <?php submit_button(); ?>
+	    </form>
+	</div>
+	<?php
+    }
+	
+    public function page_init(){		
+	register_setting('test_option_group', 'array_key', array($this, 'check_ID'));
+		
+        add_settings_section(
+	    'setting_section_id',
+	    'Setting',
+	    array($this, 'print_section_info'),
+	    'test-setting-admin'
+	);	
+		
+	add_settings_field(
+	    'some_id', 
+	    'Some ID(Title)', 
+	    array($this, 'create_an_id_field'), 
+	    'test-setting-admin',
+	    'setting_section_id'			
+	);		
+    }
+	
+    public function check_ID($input){
+        if(is_numeric($input['some_id'])){
+	    $mid = $input['some_id'];			
+	    if(get_option('test_some_id') === FALSE){
+		add_option('test_some_id', $mid);
+	    }else{
+		update_option('test_some_id', $mid);
+	    }
+	}else{
+	    $mid = '';
+	}
+	return $mid;
+    }
+	
+    public function print_section_info(){
+	print 'Enter your setting below:';
+    }
+	
+    public function create_an_id_field(){
+        ?><input type="text" id="input_whatever_unique_id_I_want" name="array_key[some_id]" value="<?=get_option('test_some_id');?>" /><?php
+    }
 }
 
-function my_plugin_menu()
-{
-	add_options_page('Configure custom mime types', 'mimetypes', 'manage_options', 'mimetypes-settings', 'unsafe_mime_settings_page');
-}
-if(is_admin()){
-	add_action( 'admin_menu', 'my_plugin_menu' );
-}
-
-?>
+$wctest = new wctest();
