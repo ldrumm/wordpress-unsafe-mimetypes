@@ -61,6 +61,20 @@ function unsafe_mime_settings_page()
 function register_mysettings()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
+	add_settings_section(
+	    'setting_section_id',
+	    'Setting',
+	    array($this, 'print_section_info'),
+	    'test-setting-admin'
+	);	
+		
+	add_settings_field(
+	    'some_id', 
+	    'Some ID(Title)', 
+	    array($this, 'create_an_id_field'), 
+	    'test-setting-admin',
+	    'setting_section_id'			
+	);
 }
 
 if(is_admin()){
