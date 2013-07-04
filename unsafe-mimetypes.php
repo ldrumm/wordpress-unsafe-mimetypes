@@ -67,7 +67,7 @@ function print_section_info()
 
 function create_mime_list_box()
 {
-	?><input type="text" id="mime_list" name="array_key[some_id]" value="<?=get_option('test_some_id');?>" /><?php
+	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings');?>" /><?php
     
 
 }
