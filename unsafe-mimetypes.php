@@ -63,7 +63,7 @@ function unsafe_mime_settings_page()
 	    <h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
 		<?php
 		settings_fields('unsafe-mime-group');
-		do_settings_sections('test-setting-admin');
+		do_settings_sections('unsafe-mime-setopt');
 		submit_button(); 
 		?></form></div><?php
 }
@@ -86,13 +86,13 @@ function register_mysettings()
 	    'setting_section_id',
 	    'Setting',
 	    'unsafe_mime_section_info',
-	    'test-setting-admin'
+	    'unsafe-mime-setopt'
 	);
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
-	    'test-setting-admin',
+	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
 }
