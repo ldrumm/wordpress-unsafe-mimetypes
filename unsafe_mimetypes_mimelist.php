@@ -1,5 +1,5 @@
 <?php
-function get_mimes_list()
+function unsafe_mime_known_list()
 {
 return array(
 '3dm'	=> "x-world/x-3dmf",
