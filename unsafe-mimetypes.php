@@ -78,7 +78,7 @@ function unsafe_mime_section_info()
 
 function create_mime_list_box()
 {
-	?><input type="text" id="mime_list" name="mime_list" value="<?php=get_option('unsafe_mime_settings_list');?>" /><?php
+	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings_list');?>" /><?php
 }
 
 function create_mime_user_dropdown()
