@@ -58,6 +58,7 @@ function unsafe_mime_settings_page()
 
 function unsafe_mime_ui_info()
 {
+	print_r(get_allowed_mime_types());
 	echo 'Configure which mimetypes you want your users to be able to upload.<br/>';
 	echo 'Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types.<br/>.<br/>';
 	echo 'The current list of custom mimetypes is as follows:<small><em>' . get_option('unsafe_mime_settings_list') . '</em></small>';
