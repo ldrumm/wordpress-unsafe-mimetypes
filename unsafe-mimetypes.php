@@ -20,7 +20,7 @@ function custom_upload_mimes_filter()
 			$mimes = explode(' ', get_option('unsafe_mime_settings'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
-					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)) ? $mimes_list[$mime] :'application/octet-stream';
+					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
 				}
 				print_r($existing_mimes);
 				return $existing_mimes;
