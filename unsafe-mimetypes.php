@@ -23,7 +23,6 @@ function custom_upload_mimes_filter()
 				foreach($mimes as $mime){
 					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
 				}
-				print_r($existing_mimes);
 				return $existing_mimes;
 			}
 			return NULL;
@@ -52,7 +51,6 @@ function unsafe_mime_settings_page()
 	if(isset($_POST['mime_priv'])){
 		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
 	}
-	print_r($_POST);
 	?>
 	
 	<div class="wrap">
@@ -79,7 +77,6 @@ function create_mime_list_box()
 function create_mime_priv_dropdown()
 {
 	$opt = get_option('unsafe_mime_settings_priv');
-	print("current privilege is $opt");
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
 	$a_val = $opt;
 	$b_friendly = ($opt === 'admin')? 'All uploaders':'Admins Only';
