@@ -86,13 +86,13 @@ function register_mysettings()
 	    'setting_section_id',
 	    'Setting',
 	    'unsafe_mime_section_info',
-	    'unsafe-mime-settings'
+	    'test-setting-admin'
 	);
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
-	    'unsafe-mime-settings',
+	    'test-setting-admin',
 	    'setting_section_id'
 	);
 }
