@@ -83,7 +83,7 @@ function create_mime_list_box()
 
 function create_mime_user_dropdown()
 {
-	?><select name="mime_user" selected="<?php=get_option('unsafe_mime_settings_user')?>"></select>
+	?><select name="mime_user" selected="<?=get_option('unsafe_mime_settings_user')?>"></select>
 	
 	<?php
 }
