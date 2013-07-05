@@ -40,7 +40,7 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	print_r($_POST);
+	print_r($_POST['mime_list']);
 	if(isset($_POST['mime_list']))
 	{
 		echo 'updating database with '. $_POST['mime_list'];
