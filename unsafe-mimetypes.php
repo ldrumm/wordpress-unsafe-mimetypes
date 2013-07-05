@@ -50,7 +50,7 @@ function unsafe_mime_settings_page()
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2>	
-		<form method="post" action="options-general.php">
+		<form method="post" action="options.php">
 		<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('test-setting-admin');
