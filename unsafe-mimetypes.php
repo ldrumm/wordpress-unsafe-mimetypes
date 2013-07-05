@@ -17,8 +17,8 @@ function unsafe_mime_list_types()
 
 function custom_upload_mimes_filter()
 {
-		$mimes = explode(' ', get_option('unsafe_mime_settings');
-		if(isset($mimes)
+		$mimes = explode(' ', get_option('unsafe_mime_settings'));
+		if(isset($mimes))
 		{
 			foreach($mimes as $mime)
 			{
