@@ -15,20 +15,22 @@ function unsafe_mime_list_types()
 	return 'Your current allowed filetypes:<em>' . get_option('unsafe_mime_settings') . '</em>';
 }
 
-function unsafe_mime_commit_types()
+function custom_upload_mimes_filter()
 {
+		$mimes = explode(' ', get_option('unsafe_mime_settings');
+		if(isset($mimes)
+		{
+			foreach($mimes as $mime)
+			{
+				$existing_mimes[$mime] = 'application/octet-stream';
 
-	
+			}
+			return $existing_mimes;
+		}
+		else return '';
 }
 
-function custom_upload_mimes()
-{
-    // change the word forbiddenfiletype below to an extension you wish to allow
-    $existing_mimes[get_option('unsafe_mime_settings')] = 'application/octet-stream';
-    return $existing_mimes;
-}
-
-function my_plugin_menu()
+function unsafe_mime_admin_menu()
 {
 	add_options_page(
 		'Configure custom mime types', 
@@ -51,7 +53,7 @@ function unsafe_mime_settings_page()
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2>	
-		<form method="post" action="options.php">
+		<form method="post" action="options-general.php?page=mimetypes-settings">
 		<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('test-setting-admin');
@@ -91,9 +93,9 @@ function register_mysettings()
 	);
 }
 if(is_admin()){
-	add_action('admin_menu', 'my_plugin_menu' );
+	add_action('admin_menu', 'unsafe_mime_admin_menu' );
 	add_action('admin_init', 'register_mysettings');
-	add_filter('upload_mimes', 'custom_upload_mimes');
+	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
 	
 ?>
