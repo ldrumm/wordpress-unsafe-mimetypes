@@ -8,7 +8,7 @@ Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
 */
-require_once('mimelist.php');
+require_once('unsafe_mimetypes_mimelist.php');
 if(!function_exists('wp_get_current_user')) {
 	include(ABSPATH . "wp-includes/pluggable.php");
 }
