@@ -55,7 +55,7 @@ function unsafe_mime_admin_menu()
 function unsafe_mime_settings_page()
 {
 
-	if(isset($_POST['mime_list']) && ){
+	if(isset($_POST['mime_list']) ){
 		if(current_user_can('manage_options')){
 			update_option('unsafe_mime_settings', $_POST['mime_list']);
 		}
