@@ -8,12 +8,13 @@ Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
 */
+
 require_once('unsafe_mimetypes_mimelist.php');
 if(!function_exists('wp_get_current_user')) {
 	include(ABSPATH . "wp-includes/pluggable.php");
 }
 
-function custom_upload_mimes_filter()
+function unsafe_mime_upload_filters()
 {
 		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = get_mimes_list();
@@ -28,16 +29,6 @@ function custom_upload_mimes_filter()
 			return NULL;
 		}
 		else return NULL;
-}
-
-function unsafe_mime_admin_menu()
-{
-	add_options_page(
-		'Configure custom mime types', 
-		'Allowed mimetypes', 
-		'manage_options', 
-		'mimetypes-settings', 
-		'unsafe_mime_settings_page');
 }
 
 function unsafe_mime_settings_page()
@@ -63,18 +54,18 @@ function unsafe_mime_settings_page()
 		?></form></div><?php
 }
 
-function unsafe_mime_section_info()
+function unsafe_mime_ui_info()
 {
 	echo 'Configure which mimetypes you want to be able to upload below...';
-	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings_list'). '</em>';
+	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings_list') . '</em>';
 }
 
-function create_mime_list_box()
+function unsafe_mime_ui_list_box()
 {
 	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings_list');?>" /><?php
 }
 
-function create_mime_priv_dropdown()
+function unsafe_mime_ui_priv_select()
 {
 	$opt = get_option('unsafe_mime_settings_priv');
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
@@ -90,26 +81,36 @@ function create_mime_priv_dropdown()
 	<?php
 }
 
-function register_mime_settings()
+function unsafe_mime_admin_menu()
+{
+	add_options_page(
+		'Configure custom mime types', 
+		'Allowed Mimetypes', 
+		'manage_options', 
+		'mimetypes-settings', 
+		'unsafe_mime_settings_page');
+}
+
+function unsafe_mime_register_ui()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	add_settings_section(
 	    'setting_section_id',
 	    'Setting',
-	    'unsafe_mime_section_info',
+	    'unsafe_mime_ui_info',
 	    'unsafe-mime-setopt'
 	);
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
-	    'create_mime_list_box', 
+	    'unsafe_mime_ui_list_box', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
 	add_settings_field(
 	    'mime_priv', 
 	    'User level required to upload unsafe mimetypes', 
-	    'create_mime_priv_dropdown', 
+	    'unsafe_mime_ui_priv_select', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
@@ -118,8 +119,8 @@ function register_mime_settings()
 if(is_admin()){
 	if (current_user_can('manage_options') ){
 		add_action('admin_menu', 'unsafe_mime_admin_menu' );
-		add_action('admin_init', 'register_mime_settings');
+		add_action('admin_init', 'unsafe_mime_register_ui');
 	}
-	add_filter('upload_mimes', 'custom_upload_mimes_filter');
+	add_filter('upload_mimes', 'unsafe_mime_upload_filters');
 }
 ?>
