@@ -8,9 +8,9 @@ Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
 */
-require_once('mimlist.php');
+require_once('mimelist.php');
 if(!function_exists('wp_get_current_user')) {
-include(ABSPATH . "wp-includes/pluggable.php");
+	include(ABSPATH . "wp-includes/pluggable.php");
 }
 
 function custom_upload_mimes_filter()
@@ -20,8 +20,7 @@ function custom_upload_mimes_filter()
 			$mimes = explode(' ', get_option('unsafe_mime_settings'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
-					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list) == true) ? $mimes_list[$mime] :'application/octet-stream'; //This is a bit of a hack but PHP have deprecated the mimetype functions and now require PECL to be installed for the new functions to work.
-				
+					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)) ? $mimes_list[$mime] :'application/octet-stream';
 				}
 				print_r($existing_mimes);
 				return $existing_mimes;
