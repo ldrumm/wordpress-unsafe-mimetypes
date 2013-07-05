@@ -17,11 +17,7 @@ function unsafe_mime_list_types()
 
 function unsafe_mime_commit_types()
 {
-	if(isset($_POST['mime_list']))
-	{
-		echo 'updating database with '. $_POST['mime_list'];
-		add_option('unsafe_mime_settings', $_POST['mime_list']);
-	}
+
 	
 }
 
@@ -44,7 +40,11 @@ function my_plugin_menu()
 
 function unsafe_mime_settings_page()
 {
-	print_r($_POST);
+	if(isset($_POST['mime_list']))
+	{
+		echo 'updating database with '. $_POST['mime_list'];
+		add_option('unsafe_mime_settings', $_POST['mime_list']);
+	}
 	?>
 	
 	<div class="wrap">
