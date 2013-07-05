@@ -30,11 +30,11 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-<?php
+
 if(!function_exists('wp_get_current_user')) {
 include(ABSPATH . "wp-includes/pluggable.php");
 }
-?>
+
 
 function custom_upload_mimes_filter()
 {
