@@ -52,7 +52,9 @@ function unsafe_mime_settings_page()
 	if(isset($_POST['mime_priv'])){
 		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
 	}
+	print_r($_POST);
 	?>
+	
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
