@@ -3,7 +3,7 @@
 Plugin Name: wordpress unsafe mimetypes
 Plugin URI: http://redmine.lukedrummond.net/projects/wp-unsafe-mimetypes
 Description: Allows users to add file types to the whitelist of allowed media formats.  This  is especially useful if you wish to distribute binaries, or specialist media formats (i.e. not just mp3, jpg and pdf)
-Version: 0.0.1
+Version: 0.1
 Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
@@ -37,7 +37,7 @@ function unsafe_mime_settings_page()
 		die(__("setting option not allowed"));
 	}
 	if(isset($_POST['mime_list'])){
-			update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
+	    update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
 	}
 	if(isset($_POST['mime_priv'])){
 		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
@@ -51,12 +51,15 @@ function unsafe_mime_settings_page()
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('unsafe-mime-setopt');
 		submit_button(); 
-		?></form></div><?php
+		?>
+		</form></div>
+		<?php
 }
 
 function unsafe_mime_ui_info()
 {
-	echo 'Configure which mimetypes you want to be able to upload below...';
+	echo 'Configure which mimetypes you want your users to be able to upload.';
+	echo 'Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types.';
 	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings_list') . '</em>';
 }
 
@@ -102,7 +105,7 @@ function unsafe_mime_register_ui()
 	);
 	add_settings_field(
 	    'mime_list', 
-	    'List of file extensions (no dot, space separated)', 
+	    'List of file extensions<br> <small>no dot, space separated</small>', 
 	    'unsafe_mime_ui_list_box', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
