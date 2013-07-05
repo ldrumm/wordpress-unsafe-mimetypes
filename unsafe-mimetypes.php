@@ -43,22 +43,14 @@ function unsafe_mime_admin_menu()
 
 function unsafe_mime_settings_page()
 {
-
-	if(isset($_POST['mime_list']) ){
-		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
-		}
-		else {
-			die(__("setting option not allowed"));
-		}
+	if(!current_user_can('manage_options'){
+		die(__("setting option not allowed"));
 	}
-	if(isset($_POST['mime_user']) ){
-		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings_priv', $_POST['mime_user']);
-		}
-		else {
-			die(__("setting option not allowed"));
-		}
+	if(isset($_POST['mime_list']) ){
+			update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
+	}
+	if(isset($_POST['mime_priv']) ){
+		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
 	}
 	?>
 	<div class="wrap">
@@ -82,16 +74,17 @@ function create_mime_list_box()
 	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings_list');?>" /><?php
 }
 
-function create_mime_user_dropdown()
+function create_mime_priv_dropdown()
 {
 	$opt = get_option('unsafe_mime_settings_priv');
+	print("current privilege is $opt");
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
 	$a_val = $opt;
-	$b_friendly = ($opt === 'admin')? 'All Uploaders':'Admins Only';
+	$b_friendly = ($opt === 'admin')? 'All uploaders':'Admins Only';
 	$b_val = ($opt === 'admin')? 'all':'admins';
 	?>
 	
-	<select name="mime_user">
+	<select name="mime_priv">
 		<option selected value="<?=$a_val?>"><?=$a_friendly?></option>
 		<option value="<?=$b_val?>"><?=$b_friendly?></option>
 	</select>
@@ -115,9 +108,9 @@ function register_mime_settings()
 	    'setting_section_id'
 	);
 	add_settings_field(
-	    'mime_user', 
+	    'mime_priv', 
 	    'User level required to upload unsafe mimetypes', 
-	    'create_mime_user_dropdown', 
+	    'create_mime_priv_dropdown', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
