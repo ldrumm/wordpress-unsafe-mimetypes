@@ -45,13 +45,20 @@ function unsafe_mime_settings_page()
 
 	if(isset($_POST['mime_list']) ){
 		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings', $_POST['mime_list']);
+			update_option('unsafe_mime_settings', strtolower($_POST['mime_list']));
 		}
 		else {
 			die(__("setting option not allowed"));
 		}
 	}
-	if(isset($_POST['mime_user']))
+	if(isset($_POST['mime_user']) ){
+		if(current_user_can('manage_options')){
+			update_option('unsafe_mime_settings_pri', $_POST['mime_list']);
+		}
+		else {
+			die(__("setting option not allowed"));
+		}
+	}
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
@@ -66,17 +73,19 @@ function unsafe_mime_settings_page()
 function unsafe_mime_section_info()
 {
 	echo 'Configure which mimetypes you want to be able to upload below...';
-	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings'). '</em>';
+	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings_list'). '</em>';
 }
 
 function create_mime_list_box()
 {
-	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings');?>" /><?php
+	?><input type="text" id="mime_list" name="mime_list" value="<?php=get_option('unsafe_mime_settings_list');?>" /><?php
 }
 
 function create_mime_user_dropdown()
 {
-	?><input type="text" id="mime_user" name="mime_user" value="<?=get_option('unsafe_mime_settings');?>" /><?php
+	?><select name="mime_user" selected="<?php=get_option('unsafe_mime_settings_user')?>"></select>
+	
+	<?php
 }
 
 function register_mime_settings()
