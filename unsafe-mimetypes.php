@@ -111,10 +111,10 @@ function register_mysettings()
 
 
 if(is_admin()){
-#	if (current_user_can('manage_options') ){
-#		add_action('admin_menu', 'unsafe_mime_admin_menu' );
-#		add_action('admin_init', 'register_mysettings');
-#	}
-#	add_filter('upload_mimes', 'custom_upload_mimes_filter');
+	if (current_user_can('manage_options') ){
+		add_action('admin_menu', 'unsafe_mime_admin_menu' );
+		add_action('admin_init', 'register_mysettings');
+	}
+	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
 ?>
