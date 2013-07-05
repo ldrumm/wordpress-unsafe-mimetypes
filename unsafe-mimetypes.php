@@ -10,20 +10,12 @@ License: zlib
 */
 /*Add the settings options to the wordpress admin menu*/
 
-function unsafe_mime_list_types()
-{
-	return 'Your current allowed filetypes:<em>' . get_option('unsafe_mime_settings') . '</em>';
-}
-
 function custom_upload_mimes_filter()
 {
 		$mimes = explode(' ', get_option('unsafe_mime_settings'));
-		if(isset($mimes))
-		{
-			foreach($mimes as $mime)
-			{
+		if(isset($mimes)){
+			foreach($mimes as $mime){
 				$existing_mimes[$mime] = 'application/octet-stream';
-
 			}
 			return $existing_mimes;
 		}
@@ -42,32 +34,24 @@ function unsafe_mime_admin_menu()
 
 function unsafe_mime_settings_page()
 {
-	print_r($_POST['mime_list']);
-	if(isset($_POST['mime_list']))
-	{
-		echo 'updating database with '. $_POST['mime_list'];
+	if(isset($_POST['mime_list'])){
 		update_option('unsafe_mime_settings', $_POST['mime_list']);
 	}
 	?>
-	
 	<div class="wrap">
 	    <?php screen_icon(); ?>
-	    <h2>Configure Custom Mimetypes</h2>	
-		<form method="post" action="options-general.php?page=mimetypes-settings">
+	    <h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
 		<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('test-setting-admin');
 		submit_button(); 
-		?>
-	    </form>
-	</div>
-	<?php
+		?></form></div><?php
 }
 
-function print_section_info()
+function unsafe_mime_section_info()
 {
 	echo 'Configure which mimetypes you want to be able to upload below...';
-	echo 'The current list of custom mimetypes is as follows<br/><br/><em>' . unsafe_mime_list_types() . '</em>';
+	echo 'The current list of custom mimetypes is as follows:<br/><br/><em>' . get_option('unsafe_mime_settings'). '</em>';
 }
 
 function create_mime_list_box()
@@ -81,7 +65,7 @@ function register_mysettings()
 	add_settings_section(
 	    'setting_section_id',
 	    'Setting',
-	    'print_section_info',
+	    'unsafe_mime_section_info',
 	    'test-setting-admin'
 	);
 	add_settings_field(
@@ -97,5 +81,7 @@ if(is_admin()){
 	add_action('admin_init', 'register_mysettings');
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
-	
+else {
+	echo"Get off my lawn!"
+}
 ?>
