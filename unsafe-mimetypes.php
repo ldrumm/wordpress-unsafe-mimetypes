@@ -15,8 +15,9 @@ if(!function_exists('wp_get_current_user')) {
 
 function custom_upload_mimes_filter()
 {
+		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = get_mimes_list();
-		if(current_user_can('manage_options')){
+		if( (($priv ==='all') && current_user_can('upload_files')) || (($priv ==='admin') && current_user_can('manage_options')) ){
 			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
