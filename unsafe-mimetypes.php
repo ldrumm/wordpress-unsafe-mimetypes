@@ -82,6 +82,6 @@ if(is_admin()){
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
 else {
-	echo"Get off my lawn!"
+	echo"Get off my lawn!";
 }
 ?>
