@@ -56,11 +56,11 @@ function unsafe_mime_settings_page()
 {
 
 	if(isset($_POST['mime_list']) && ){
-		if(current_user_can('manage_options'){
+		if(current_user_can('manage_options')){
 			update_option('unsafe_mime_settings', $_POST['mime_list']);
 		}
 		else {
-			die(__("setting option not allowed");
+			die(__("setting option not allowed"));
 		}
 	}
 	?>
