@@ -51,6 +51,7 @@ function unsafe_mime_settings_page()
 			die(__("setting option not allowed"));
 		}
 	}
+	if(isset($_POST['mime_user']))
 	?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
@@ -73,6 +74,11 @@ function create_mime_list_box()
 	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings');?>" /><?php
 }
 
+function create_mime_user_dropdown()
+{
+	?><input type="text" id="mime_user" name="mime_user" value="<?=get_option('unsafe_mime_settings');?>" /><?php
+}
+
 function register_mime_settings()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
@@ -86,6 +92,13 @@ function register_mime_settings()
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
+	    'unsafe-mime-setopt',
+	    'setting_section_id'
+	);
+	add_settings_field(
+	    'mime_user', 
+	    'User level required to upload unsafe mimetypes', 
+	    'create_mime_user_dropdown', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
