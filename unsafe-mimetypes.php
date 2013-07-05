@@ -82,7 +82,4 @@ if(is_admin()){
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 	echo "du bist admin";
 }
-else {
-	echo"Get off my lawn!";
-}
 ?>
