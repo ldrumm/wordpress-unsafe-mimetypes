@@ -83,11 +83,16 @@ function create_mime_list_box()
 
 function create_mime_user_dropdown()
 {
+	$opt = get_option('unsafe_mime_settings_priv');
+	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
+	$a_val = $opt;
+	$b_friendly = ($opt === 'admin')? 'All Uploaders':'Admins Only';
+	$b_val = ($opt === 'admin')? 'all':'admins';
 	?>
+	
 	<select name="mime_user">
-		<option selected><?=get_option('unsafe_mime_settings_priv')?></option>
-		<option>admin</option>
-		<option>editors</option>
+		<option selected value="<?=$a_val?>"><?=$a_friendly?></option>
+		<option value="<?=$b_val?>"><?=$b_friendly?></option>
 	</select>
 	<?php
 }
