@@ -53,7 +53,7 @@ function unsafe_mime_settings_page()
 	}
 	if(isset($_POST['mime_user']) ){
 		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings_priv', $_POST['mime_list']);
+			update_option('unsafe_mime_settings_priv', $_POST['mime_user']);
 		}
 		else {
 			die(__("setting option not allowed"));
