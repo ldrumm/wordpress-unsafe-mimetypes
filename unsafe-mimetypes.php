@@ -17,9 +17,9 @@ if(!function_exists('wp_get_current_user')) {
 function unsafe_mime_upload_filters()
 {
 		$priv = get_option('unsafe_mime_settings_priv');
-		$mimes_list = get_mimes_list();
+		$mimes_list = unsafe_mime_known_list();
 		if( (($priv ==='all') && current_user_can('upload_files')) || (($priv ==='admin') && current_user_can('manage_options')) ){
-			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
+			$mimes = explode(' ', sanitize_mime_type(get_option('unsafe_mime_settings_list')));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
 					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
@@ -37,10 +37,10 @@ function unsafe_mime_settings_page()
 		die(__("setting option not allowed"));
 	}
 	if(isset($_POST['mime_list'])){
-	    update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
+	    update_option('unsafe_mime_settings_list', sanitize_mime_type(strtolower($_POST['mime_list'])));
 	}
 	if(isset($_POST['mime_priv'])){
-		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
+		update_option('unsafe_mime_settings_priv', sanitize_text_field($_POST['mime_priv']));
 	}
 	?>
 	
@@ -61,17 +61,17 @@ function unsafe_mime_ui_info()
 	print_r(get_allowed_mime_types());
 	echo 'Configure which mimetypes you want your users to be able to upload.<br/>';
 	echo 'Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types.<br/>.<br/>';
-	echo 'The current list of custom mimetypes is as follows:<small><em>' . get_option('unsafe_mime_settings_list') . '</em></small>';
+	echo 'The current list of custom mimetypes is as follows:<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>';
 }
 
 function unsafe_mime_ui_list_box()
 {
-	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings_list');?>" /><?php
+	?><input type="text" id="mime_list" name="mime_list" value="<?=sanitize_text_field(get_option('unsafe_mime_settings_list'));?>" /><?php
 }
 
 function unsafe_mime_ui_priv_select()
 {
-	$opt = get_option('unsafe_mime_settings_priv');
+	$opt = sanitize_text_field(get_option('unsafe_mime_settings_priv'));
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
 	$a_val = $opt;
 	$b_friendly = ($opt === 'admin')? 'All uploaders':'Admins Only';
