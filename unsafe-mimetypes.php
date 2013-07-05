@@ -83,7 +83,7 @@ function create_mime_priv_dropdown()
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
 	$a_val = $opt;
 	$b_friendly = ($opt === 'admin')? 'All uploaders':'Admins Only';
-	$b_val = ($opt === 'admin')? 'all':'admins';
+	$b_val = ($opt === 'admin')? 'all':'admin';
 	?>
 	
 	<select name="mime_priv">
