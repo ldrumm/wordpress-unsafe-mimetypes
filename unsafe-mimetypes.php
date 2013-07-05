@@ -54,8 +54,14 @@ function unsafe_mime_admin_menu()
 
 function unsafe_mime_settings_page()
 {
-	if(isset($_POST['mime_list'])){
-		update_option('unsafe_mime_settings', $_POST['mime_list']);
+
+	if(isset($_POST['mime_list']) && ){
+		if(current_user_can('manage_options'){
+			update_option('unsafe_mime_settings', $_POST['mime_list']);
+		}
+		else {
+			die(__("setting option not allowed");
+		}
 	}
 	?>
 	<div class="wrap">
@@ -99,8 +105,10 @@ function register_mysettings()
 
 
 if(is_admin()){
-	add_action('admin_menu', 'unsafe_mime_admin_menu' );
-	add_action('admin_init', 'register_mysettings');
+	if (current_user_can('manage_options') ){
+		add_action('admin_menu', 'unsafe_mime_admin_menu' );
+		add_action('admin_init', 'register_mysettings');
+	}
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
 ?>
