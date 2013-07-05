@@ -7,29 +7,7 @@ Version: 0.0.1
 Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
-*//*
-Copyright (c) 2013 Luke Drummond
-
-This software is provided 'as-is', without any express or implied
-warranty. In no event will the authors be held liable for any damages
-arising from the use of this software.
-
-Permission is granted to anyone to use this software for any purpose,
-including commercial applications, and to alter it and redistribute it
-freely, subject to the following restrictions:
-
-   1. The origin of this software must not be misrepresented; you must not
-   claim that you wrote the original software. If you use this software
-   in a product, an acknowledgment in the product documentation would be
-   appreciated but is not required.
-
-   2. Altered source versions must be plainly marked as such, and must not be
-   misrepresented as being the original software.
-
-   3. This notice may not be removed or altered from any source
-   distribution.
 */
-
 
 if(!function_exists('wp_get_current_user')) {
 include(ABSPATH . "wp-includes/pluggable.php");
@@ -38,14 +16,17 @@ include(ABSPATH . "wp-includes/pluggable.php");
 
 function custom_upload_mimes_filter()
 {
-		$mimes = explode(' ', get_option('unsafe_mime_settings'));
-		if(isset($mimes)){
-			foreach($mimes as $mime){
-				$existing_mimes[$mime] = 'application/octet-stream';
+		if(current_user_can('manage_options')){
+			$mimes = explode(' ', get_option('unsafe_mime_settings'));
+			if(isset($mimes)){
+				foreach($mimes as $mime){
+					$existing_mimes[$mime] = 'application/octet-stream';
+				}
+				return $existing_mimes;
 			}
-			return $existing_mimes;
+			return NULL;
 		}
-		else return '';
+		else return NULL;
 }
 
 function unsafe_mime_admin_menu()
@@ -91,7 +72,7 @@ function create_mime_list_box()
 	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings');?>" /><?php
 }
 
-function register_mysettings()
+function register_mime_settings()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	add_settings_section(
@@ -109,11 +90,10 @@ function register_mysettings()
 	);
 }
 
-
 if(is_admin()){
 	if (current_user_can('manage_options') ){
 		add_action('admin_menu', 'unsafe_mime_admin_menu' );
-		add_action('admin_init', 'register_mysettings');
+		add_action('admin_init', 'register_mime_settings');
 	}
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
 }
