@@ -17,7 +17,7 @@ function custom_upload_mimes_filter()
 {
 		$mimes_list = get_mimes_list();
 		if(current_user_can('manage_options')){
-			$mimes = explode(' ', get_option('unsafe_mime_settings'));
+			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
 					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
@@ -45,7 +45,7 @@ function unsafe_mime_settings_page()
 
 	if(isset($_POST['mime_list']) ){
 		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings', strtolower($_POST['mime_list']));
+			update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
 		}
 		else {
 			die(__("setting option not allowed"));
@@ -53,7 +53,7 @@ function unsafe_mime_settings_page()
 	}
 	if(isset($_POST['mime_user']) ){
 		if(current_user_can('manage_options')){
-			update_option('unsafe_mime_settings_pri', $_POST['mime_list']);
+			update_option('unsafe_mime_settings_priv', $_POST['mime_list']);
 		}
 		else {
 			die(__("setting option not allowed"));
@@ -83,7 +83,7 @@ function create_mime_list_box()
 
 function create_mime_user_dropdown()
 {
-	?><select name="mime_user" selected="<?=get_option('unsafe_mime_settings_user')?>"></select>
+	?><select name="mime_user" selected="<?=get_option('unsafe_mime_settings_priv')?>"></select>
 	
 	<?php
 }
