@@ -8,20 +8,22 @@ Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
 */
-
+require_once('mimlist.php');
 if(!function_exists('wp_get_current_user')) {
 include(ABSPATH . "wp-includes/pluggable.php");
 }
 
-
 function custom_upload_mimes_filter()
 {
+		$mimes_lists = get_mimes_list();
 		if(current_user_can('manage_options')){
 			$mimes = explode(' ', get_option('unsafe_mime_settings'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
-					$existing_mimes[$mime] = 'application/octet-stream';
+					$existing_mimes[$mime] = array_key_exists($mime, $mimes_list)? $mimes_list :'application/octet-stream'; //This is a bit of a hack but PHP have deprecated the mimetype functions and now require PECL to be installed for the new functions to work.
+				
 				}
+				print_r($existing_mimes);
 				return $existing_mimes;
 			}
 			return NULL;
