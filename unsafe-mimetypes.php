@@ -43,13 +43,13 @@ function unsafe_mime_admin_menu()
 
 function unsafe_mime_settings_page()
 {
-	if(!current_user_can('manage_options'){
+	if(!current_user_can('manage_options')){
 		die(__("setting option not allowed"));
 	}
-	if(isset($_POST['mime_list']) ){
+	if(isset($_POST['mime_list'])){
 			update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
 	}
-	if(isset($_POST['mime_priv']) ){
+	if(isset($_POST['mime_priv'])){
 		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
 	}
 	?>
