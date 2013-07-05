@@ -15,7 +15,7 @@ include(ABSPATH . "wp-includes/pluggable.php");
 
 function custom_upload_mimes_filter()
 {
-		$mimes_lists = get_mimes_list();
+		$mimes_list = get_mimes_list();
 		if(current_user_can('manage_options')){
 			$mimes = explode(' ', get_option('unsafe_mime_settings'));
 			if(isset($mimes)){
