@@ -51,7 +51,7 @@ function unsafe_mime_settings_page()
 	<div class="wrap">
 	    <?php screen_icon(); ?>
 	    <h2>Configure Custom Mimetypes</h2>	
-		<form method="post" action="http://192.168.1.75/wp-admin/options-general.php?page=mimetypes-settings">
+		<form method="post" action="options.php">
 		<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('test-setting-admin');
