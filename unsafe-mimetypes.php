@@ -7,8 +7,28 @@ Version: 0.0.1
 Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
+*//*
+Copyright (c) 2013 Luke Drummond
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+   1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+
+   2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+   3. This notice may not be removed or altered from any source
+   distribution.
 */
-/*Add the settings options to the wordpress admin menu*/
 
 function custom_upload_mimes_filter()
 {
@@ -66,20 +86,21 @@ function register_mysettings()
 	    'setting_section_id',
 	    'Setting',
 	    'unsafe_mime_section_info',
-	    'test-setting-admin'
+	    'unsafe-mime-settings'
 	);
 	add_settings_field(
 	    'mime_list', 
 	    'List of file extensions (no dot, space separated)', 
 	    'create_mime_list_box', 
-	    'test-setting-admin',
+	    'unsafe-mime-settings',
 	    'setting_section_id'
 	);
 }
+
+
 if(is_admin()){
 	add_action('admin_menu', 'unsafe_mime_admin_menu' );
 	add_action('admin_init', 'register_mysettings');
 	add_filter('upload_mimes', 'custom_upload_mimes_filter');
-	echo "du bist admin";
 }
 ?>
