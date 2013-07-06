@@ -19,7 +19,7 @@ function unsafe_mime_upload_filters()
 		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = unsafe_mime_known_list();
 		if( (($priv ==='all') && current_user_can('upload_files')) || (($priv ==='admin') && current_user_can('manage_options')) ){
-			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
+			$mimes = explode(' ', sanitize_text_field(get_option('unsafe_mime_settings_list')));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
 					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
@@ -37,25 +37,23 @@ function unsafe_mime_settings_page()
 		die(__("setting option not allowed"));
 	}
 	if(isset($_POST['mime_list'])){
-		update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
+	    update_option('unsafe_mime_settings_list', sanitize_mime_type(strtolower($_POST['mime_list'])));
 	}
 	if(isset($_POST['mime_priv'])){
-		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
+		update_option('unsafe_mime_settings_priv', sanitize_text_field($_POST['mime_priv']));
 	}
-	print(sanitize_text_field("Here is a bunch of text"));
 	?>
 	
-	
 	<div class="wrap">
-		<?php screen_icon(); ?>
-		<h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
-	<?php
+	    <?php screen_icon(); ?>
+	    <h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
+		<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('unsafe-mime-setopt');
 		submit_button(); 
 		?>
 		</form></div>
-	<?php
+		<?php
 }
 
 function unsafe_mime_ui_info()
@@ -63,17 +61,17 @@ function unsafe_mime_ui_info()
 	print_r(get_allowed_mime_types());
 	echo 'Configure which mimetypes you want your users to be able to upload.<br/>';
 	echo 'Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types.<br/>.<br/>';
-	echo 'The current list of custom mimetypes is as follows:<small><em>' . get_option('unsafe_mime_settings_list') . '</em></small>';
+	echo 'The current list of custom mimetypes is as follows:<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>';
 }
 
 function unsafe_mime_ui_list_box()
 {
-	?><input type="text" id="mime_list" name="mime_list" value="<?=get_option('unsafe_mime_settings_list');?>" /><?php
+	?><input type="text" id="mime_list" name="mime_list" value="<?=sanitize_text_field(get_option('unsafe_mime_settings_list'));?>" /><?php
 }
 
 function unsafe_mime_ui_priv_select()
 {
-	$opt = get_option('unsafe_mime_settings_priv');
+	$opt = sanitize_text_field(get_option('unsafe_mime_settings_priv'));
 	$a_friendly = ($opt === 'admin')? 'Admins Only':'All uploaders';
 	$a_val = $opt;
 	$b_friendly = ($opt === 'admin')? 'All uploaders':'Admins Only';
@@ -101,24 +99,24 @@ function unsafe_mime_register_ui()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	add_settings_section(
-		'setting_section_id',
-		'Setting',
-		'unsafe_mime_ui_info',
-		'unsafe-mime-setopt'
+	    'setting_section_id',
+	    'Setting',
+	    'unsafe_mime_ui_info',
+	    'unsafe-mime-setopt'
 	);
 	add_settings_field(
-		'mime_list', 
-		'List of file extensions<br> <small>no dot, space separated</small>', 
-		'unsafe_mime_ui_list_box', 
-		'unsafe-mime-setopt',
-		'setting_section_id'
+	    'mime_list', 
+	    'List of file extensions<br> <small>no dot, space separated</small>', 
+	    'unsafe_mime_ui_list_box', 
+	    'unsafe-mime-setopt',
+	    'setting_section_id'
 	);
 	add_settings_field(
-		'mime_priv', 
-		'User level required to upload unsafe mimetypes', 
-		'unsafe_mime_ui_priv_select', 
-		'unsafe-mime-setopt',
-		'setting_section_id'
+	    'mime_priv', 
+	    'User level required to upload unsafe mimetypes', 
+	    'unsafe_mime_ui_priv_select', 
+	    'unsafe-mime-setopt',
+	    'setting_section_id'
 	);
 }
 
