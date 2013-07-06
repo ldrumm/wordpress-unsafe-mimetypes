@@ -37,10 +37,10 @@ function unsafe_mime_settings_page()
 		die(__("setting option not allowed"));
 	}
 	if(isset($_POST['mime_list'])){
-	    update_option('unsafe_mime_settings_list', sanitize_mime_type(strtolower($_POST['mime_list'])));
+	    update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
 	}
 	if(isset($_POST['mime_priv'])){
-		update_option('unsafe_mime_settings_priv', sanitize_text_field($_POST['mime_priv']));
+		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
 	}
 	?>
 	
