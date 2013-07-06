@@ -37,7 +37,7 @@ function unsafe_mime_settings_page()
 		die(__("setting option not allowed"));
 	}
 	if(isset($_POST['mime_list'])){
-	    update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
+		update_option('unsafe_mime_settings_list', strtolower($_POST['mime_list']));
 	}
 	if(isset($_POST['mime_priv'])){
 		update_option('unsafe_mime_settings_priv', $_POST['mime_priv']);
@@ -45,15 +45,15 @@ function unsafe_mime_settings_page()
 	?>
 	
 	<div class="wrap">
-	    <?php screen_icon(); ?>
-	    <h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
-		<?php
+		<?php screen_icon(); ?>
+		<h2>Configure Custom Mimetypes</h2><form method="post" action="options-general.php?page=mimetypes-settings">
+	<?php
 		settings_fields('unsafe-mime-group');
 		do_settings_sections('unsafe-mime-setopt');
 		submit_button(); 
 		?>
 		</form></div>
-		<?php
+	<?php
 }
 
 function unsafe_mime_ui_info()
@@ -99,24 +99,24 @@ function unsafe_mime_register_ui()
 {
 	register_setting('unsafe-mime-group', 'custom-mime-setting');
 	add_settings_section(
-	    'setting_section_id',
-	    'Setting',
-	    'unsafe_mime_ui_info',
-	    'unsafe-mime-setopt'
+		'setting_section_id',
+		'Setting',
+		'unsafe_mime_ui_info',
+		'unsafe-mime-setopt'
 	);
 	add_settings_field(
-	    'mime_list', 
-	    'List of file extensions<br> <small>no dot, space separated</small>', 
-	    'unsafe_mime_ui_list_box', 
-	    'unsafe-mime-setopt',
-	    'setting_section_id'
+		'mime_list', 
+		'List of file extensions<br> <small>no dot, space separated</small>', 
+		'unsafe_mime_ui_list_box', 
+		'unsafe-mime-setopt',
+		'setting_section_id'
 	);
 	add_settings_field(
-	    'mime_priv', 
-	    'User level required to upload unsafe mimetypes', 
-	    'unsafe_mime_ui_priv_select', 
-	    'unsafe-mime-setopt',
-	    'setting_section_id'
+		'mime_priv', 
+		'User level required to upload unsafe mimetypes', 
+		'unsafe_mime_ui_priv_select', 
+		'unsafe-mime-setopt',
+		'setting_section_id'
 	);
 }
 
