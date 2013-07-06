@@ -19,7 +19,7 @@ function unsafe_mime_upload_filters()
 		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = unsafe_mime_known_list();
 		if( (($priv ==='all') && current_user_can('upload_files')) || (($priv ==='admin') && current_user_can('manage_options')) ){
-			$mimes = explode(' ', sanitize_text_field(get_option('unsafe_mime_settings_list')));
+			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
 					$existing_mimes[$mime] = (array_key_exists($mime, $mimes_list)===true) ? $mimes_list[$mime] :'application/octet-stream';
