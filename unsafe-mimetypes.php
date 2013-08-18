@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Unsafe Mimetypes
-Plugin URI: http://redmine.lukedrummond.net/projects/wp-unsafe-mimetypes
+Plugin URI: http://redmine.lukedrummond.net/projects/unsafe-mimetypes
 Description: Allows users to add file types to the whitelist of allowed media formats.  This is especially useful if you wish to distribute binaries, or specialist media formats (i.e. not just mp3, jpg and pdf)
 Version: 0.1
 Author: Luke Drummond
@@ -15,14 +15,14 @@ if(!function_exists('wp_get_current_user')) {
 }
 
 function unsafe_mime_lang(){
-    load_plugin_textdomain('unsafe-mimetypes', false, dirname( plugin_basename( __FILE__ ) ));
+    load_plugin_textdomain('unsafe-mimetypes', false, dirname(plugin_basename( __FILE__ )));
 }
 
 function unsafe_mime_upload_filters()
 {
 		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = unsafe_mime_known_list();
-		if( (($priv ==='all') && current_user_can('upload_files')) || (($priv === 'admin') && current_user_can('manage_options')) ){
+		if( (($priv === 'all') && current_user_can('upload_files')) || (($priv === 'admin') && current_user_can('manage_options')) ){
 			$mimes = explode(' ', get_option('unsafe_mime_settings_list'));
 			if(isset($mimes)){
 				foreach($mimes as $mime){
@@ -38,7 +38,7 @@ function unsafe_mime_upload_filters()
 function unsafe_mime_settings_page()
 {
 	if(!current_user_can('manage_options')){
-		die(__('setting option not allowed for the current user', 'unsafe-mimetypes'));
+		die(__('setting option not allowed for the current user.', 'unsafe-mimetypes'));
 	}
 	if(isset($_POST['mime_list'])){
 	    update_option('unsafe_mime_settings_list', sanitize_text_field(strtolower($_POST['mime_list'])));
@@ -68,9 +68,9 @@ function unsafe_mime_settings_page()
 
 function unsafe_mime_ui_info()
 {
-	_e('Configure which mimetypes you want your users to be able to upload','unsafe-mimetypes').'<br/>';
-	_e('Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types.','unsafe-mimetypes').'<br/><br/>';
-	echo(__('The current list of custom mimetypes is as follows:', 'unsafe-mimetypes') .'<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>');
+	_e('Configure which mimetypes you want your users to be able to upload. ','unsafe-mimetypes').'<br/>';
+	_e('Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types. ','unsafe-mimetypes').'<br/><br/>';
+	echo(__('The current list of custom mimetypes is as follows: ', 'unsafe-mimetypes') .'<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>');
 }
 
 function unsafe_mime_ui_list_box()
@@ -81,9 +81,9 @@ function unsafe_mime_ui_list_box()
 function unsafe_mime_ui_priv_select()
 {
 	$opt = sanitize_text_field(get_option('unsafe_mime_settings_priv'));
-	$a_friendly = ($opt === 'admin')? __('Admins Only','unsafe-mimetypes'):__('All uploaders','unsafe-mimetypes');
+	$a_friendly = ($opt === 'admin')? __('Admins Only', 'unsafe-mimetypes'): __('All uploaders', 'unsafe-mimetypes');
 	$a_val = $opt;
-	$b_friendly = ($opt === 'admin')? __('All uploaders','unsafe-mimetypes'):__('Admins Only','unsafe-mimetypes');
+	$b_friendly = ($opt === 'admin')? __('All uploaders', 'unsafe-mimetypes'): __('Admins Only', 'unsafe-mimetypes');
 	$b_val = ($opt === 'admin')? 'all':'admin';
 	?>
 	
@@ -115,14 +115,13 @@ function unsafe_mime_register_ui()
 	);
 	add_settings_field(
 	    'mime_list', 
-	    __('List of file extensions','unsafe-mimetypes').'<br> <small>'.__('no dot, space separated','unsafe-mimetypes').'</small>', 
-	    'unsafe_mime_ui_list_box', 
+	    __('List of file extensions','unsafe-mimetypes') . '<br> <small>'.__('no dot, space separated', 'unsafe-mimetypes') . '</small>', 'unsafe_mime_ui_list_box', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
 	add_settings_field(
 	    'mime_priv', 
-	    __('User level required to upload unsafe mimetypes','unsafe-mimetypes'), 
+	    __('User level required to upload unsafe mimetypes', 'unsafe-mimetypes'), 
 	    'unsafe_mime_ui_priv_select', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
