@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: unsafe-mimetypes\n"
-"POT-Creation-Date: 2013-08-18 17:53+0100\n"
-"PO-Revision-Date: 2013-08-18 18:41+0100\n"
+"POT-Creation-Date: 2013-08-18 16:32+0100\n"
+"PO-Revision-Date: 2013-08-18 17:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: Mariana Mercado <unsafe-mimetypes@lukedrummond.net>\n"
 "Language: es_ES\n"
@@ -16,54 +16,54 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: unsafe-mimetypes.php:41
+#: unsafe_mimetypes.php:37
 msgid "setting option not allowed for the current user"
-msgstr "Opción no permitida. "
+msgstr "Opción no permitida "
 
-#: unsafe-mimetypes.php:71
-msgid "Configure which mimetypes you want your users to be able to upload. "
-msgstr "Configura el tipo de mime que tus usuarios puedan subir. "
+#: unsafe_mimetypes.php:67
+msgid "Configure which mimetypes you want your users to be able to upload"
+msgstr "Configura el tipo de mime que tus usuarios puedan subir"
 
-#: unsafe-mimetypes.php:72
+#: unsafe_mimetypes.php:68
 msgid ""
 "Choose whether all content editors, or just WordPress Administrators can "
-"upload the 'unsafe' types. "
+"upload the 'unsafe' types."
 msgstr ""
 "Elija que todos los editores de contenido, o solamente Administradores de "
 "WordPress puedan subir tipos 'no seguros'. "
 
-#: unsafe-mimetypes.php:73
-msgid "The current list of custom mimetypes is as follows: "
-msgstr "La lista actual de tipos de mime seleccionados es la siguiente: "
+#: unsafe_mimetypes.php:69
+msgid "The current list of custom mimetypes is as follows:"
+msgstr "La lista actual de tipos de mime seleccionados es la siguiente:"
 
-#: unsafe-mimetypes.php:84 unsafe-mimetypes.php:86
+#: unsafe_mimetypes.php:80 unsafe_mimetypes.php:82
 msgid "Admins Only"
 msgstr "Solamente Administradores"
 
-#: unsafe-mimetypes.php:84 unsafe-mimetypes.php:86
+#: unsafe_mimetypes.php:80 unsafe_mimetypes.php:82
 msgid "All uploaders"
 msgstr "Todos los editores"
 
-#: unsafe-mimetypes.php:100
+#: unsafe_mimetypes.php:96
 msgid "Configure custom mime types"
 msgstr "Configura tipos de mime permitidos"
 
-#: unsafe-mimetypes.php:101
+#: unsafe_mimetypes.php:97
 msgid "Allowed Mimetypes"
 msgstr "Tipos de mime permitidos"
 
-#: unsafe-mimetypes.php:112
+#: unsafe_mimetypes.php:108
 msgid "Setting"
 msgstr "Configuración"
 
-#: unsafe-mimetypes.php:118
+#: unsafe_mimetypes.php:114
 msgid "List of file extensions"
 msgstr "Lista de extensiones de archivo"
 
-#: unsafe-mimetypes.php:118
+#: unsafe_mimetypes.php:114
 msgid "no dot, space separated"
 msgstr "sin punto, con separacion de espacio."
 
-#: unsafe-mimetypes.php:125
+#: unsafe_mimetypes.php:121
 msgid "User level required to upload unsafe mimetypes"
 msgstr "Nivel de usuario requerido para subir tipos de mime 'no seguros'"
