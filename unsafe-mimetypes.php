@@ -19,7 +19,10 @@ function unsafe_mime_lang(){
 }
 
 function unsafe_mime_upload_filters()
-{
+{       
+        if (get_option('unsafe_mime_settings_allow_builtins') === 'true'){
+            $existing_mimes =  wp_get_mime_types();
+        }
 		$priv = get_option('unsafe_mime_settings_priv');
 		$mimes_list = unsafe_mime_known_list();
 		if( (($priv === 'all') && current_user_can('upload_files')) || (($priv === 'admin') && current_user_can('manage_options')) ){
@@ -30,9 +33,9 @@ function unsafe_mime_upload_filters()
 				}
 				return $existing_mimes;
 			}
-			return NULL;
+			return array();
 		}
-		else return NULL;
+		else return array();
 }
 
 function unsafe_mime_settings_page()
@@ -40,15 +43,28 @@ function unsafe_mime_settings_page()
 	if(!current_user_can('manage_options')){
 		die(__('setting option not allowed for the current user.', 'unsafe-mimetypes'));
 	}
-	if(isset($_POST['mime_list'])){
-	    update_option('unsafe_mime_settings_list', sanitize_text_field(strtolower($_POST['mime_list'])));
-	}
-	if(isset($_POST['mime_priv'])){
-		$mime_priv = sanitize_text_field($_POST['mime_priv']);
-		if(($mime_priv !== 'admin') || ($mime_priv !== 'all')){
-			$mime_priv = 'admin';
-		}
-		update_option('unsafe_mime_settings_priv', $mime_priv);
+	if(isset($_POST)){
+	    if (isset($_POST['option_page']) && ($_POST['option_page'] == 'unsafe-mime-group') && ($_POST['action'] == 'update')){
+	        if(isset($_POST['mime_list'])){
+                update_option('unsafe_mime_settings_list', sanitize_text_field(strtolower($_POST['mime_list'])));
+	        }
+	        
+            if(isset($_POST['mime_priv'])){
+		        $mime_priv =$_POST['mime_priv'];
+		        if(!(($mime_priv === 'admin') || ($mime_priv === 'all'))){
+			        $mime_priv = 'admin';
+		        }
+		       $ret = update_option('unsafe_mime_settings_priv', $mime_priv);
+	        }
+            
+            if(isset($_POST['allow_predefined_types'])){
+                $allow_predefined_types = (($_POST['allow_predefined_types'] === 'true') ? 'true' : 'false');
+                update_option('unsafe_mime_settings_allow_builtins',  $allow_predefined_types);
+            }
+            else{ 
+                update_option('unsafe_mime_settings_allow_builtins',  'false');
+            }
+	    }
 	}
 	?>
 	
@@ -68,9 +84,9 @@ function unsafe_mime_settings_page()
 
 function unsafe_mime_ui_info()
 {
-	_e('Configure which mimetypes you want your users to be able to upload. ','unsafe-mimetypes').'<br/>';
-	_e('Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types. ','unsafe-mimetypes').'<br/><br/>';
-	echo(__('The current list of custom mimetypes is as follows: ', 'unsafe-mimetypes') .'<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>');
+	echo(__('Configure which mimetypes you want your users to be able to upload. ','unsafe-mimetypes').'<br/>');
+	echo(__('Choose whether all content editors, or just WordPress Administrators can upload the \'unsafe\' types. ','unsafe-mimetypes') . '<br/><br/>');
+	echo(__('The current list of custom mimetypes is as follows: ', 'unsafe-mimetypes') . '<small><em>' . sanitize_text_field(get_option('unsafe_mime_settings_list')) . '</em></small>');
 }
 
 function unsafe_mime_ui_list_box()
@@ -88,10 +104,19 @@ function unsafe_mime_ui_priv_select()
 	?>
 	
 	<select name="mime_priv">
-		<option selected value="<?=$a_val?>"><?=$a_friendly?></option>
+		<option value="<?=$a_val?>"><?=$a_friendly?></option>
 		<option value="<?=$b_val?>"><?=$b_friendly?></option>
 	</select>
 	<?php
+}
+
+function unsafe_mime_ui_allow_builtins()
+{
+    $opt = sanitize_text_field(get_option('unsafe_mime_settings_allow_builtins'));
+    $checked = (($opt === 'true')?'checked':'');
+    ?>
+    <input type="checkbox" name="allow_predefined_types" value="true" <?=$checked?>>
+    <?php
 }
 
 function unsafe_mime_admin_menu()
@@ -115,7 +140,8 @@ function unsafe_mime_register_ui()
 	);
 	add_settings_field(
 	    'mime_list', 
-	    __('List of file extensions','unsafe-mimetypes') . '<br> <small>'.__('no dot, space separated', 'unsafe-mimetypes') . '</small>', 'unsafe_mime_ui_list_box', 
+	    __('List of file extensions','unsafe-mimetypes') . '<br> <small>'.__('no dot, space separated', 'unsafe-mimetypes') . '</small>',
+	    'unsafe_mime_ui_list_box', 
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);
@@ -123,6 +149,13 @@ function unsafe_mime_register_ui()
 	    'mime_priv', 
 	    __('User level required to upload unsafe mimetypes', 'unsafe-mimetypes'), 
 	    'unsafe_mime_ui_priv_select', 
+	    'unsafe-mime-setopt',
+	    'setting_section_id'
+	);
+	add_settings_field(
+	    'inbuilt_types',
+	    __('Allow the default WordPress list of allowed types (all uploaders)', 'unsafe-mimetypes'),
+	    'unsafe_mime_ui_allow_builtins',
 	    'unsafe-mime-setopt',
 	    'setting_section_id'
 	);

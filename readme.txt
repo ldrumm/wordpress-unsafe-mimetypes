@@ -2,8 +2,8 @@
 Contributors: ldrumm
 Tags: filetypes, security
 Requires at least: 3.0.1
-Tested up to: 3.6
-Stable tag: 0.1.0
+Tested up to: 3.8
+Stable tag: 0.1.2
 License: zlib
 License URI: http://zlib.net/zlib_license.html
 
@@ -26,7 +26,7 @@ Note: This plugin does not permit the user to change the maximum upload size, wh
 
 = Once I've added a filetype to the whitelist, can I then use the WordPress media manager to include uploaded files in my Post/Page? =
 
-Yes.  This is the expected usage.  The author uses it to distribute `.wav` and `.flac` audio files, and upload `.png` images as part of the post.
+Yes.  This is the expected usage.  The author uses it to distribute `.wav` and `.flac` audio files, as part of a post.
 
 = Is is safe to allow users to upload `php` files? =
 
@@ -35,9 +35,21 @@ Yes.  This is the expected usage.  The author uses it to distribute `.wav` and `
 == Screenshots ==
 
 1. This is the error message you will see from the media manager when trying to upload many non-standard filetypes.
-2. This is admin interface where you can define a list of file extensions you wish to add to the whitelist. If you trust your editors you can also choose to grant the same permissions to them also.
+2. This is the admin interface where you can define a list of file extensions you wish to add to the whitelist. If you trust your editors you can also choose to grant the same permissions to them also.
+3. If you want, you can allow your editor permission to upload the default types, while allowing your admins greater power by ticking the 'allow default types' box, and giving the extra permissions to admin only. 
 
 == Changelog ==
+
+=  0.1.2 =
+* refixed sickiness issue, when creating new installations.
+* corrected issue with translation.
+* improved settings update logic
+
+= 0.1.1 = 
+* fixed stickiness of admin/editor permissions in admin interface (report:jswagner)
+* added option to allow the builtin allowed types (all uploaders)(report:jswagner)
+* small cleanups in readme.txt
+* added extra screenshot.
 
 = 0.1.0 =
 
