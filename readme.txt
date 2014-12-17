@@ -3,7 +3,7 @@ Contributors: ldrumm
 Tags: filetypes, security
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 License: zlib
 License URI: http://zlib.net/zlib_license.html
 
@@ -39,6 +39,9 @@ Yes.  This is the expected usage.  The author uses it to distribute `.wav` and `
 3. If you want, you can allow your editor permission to upload the default types, while allowing your admins greater power by ticking the 'allow default types' box, and giving the extra permissions to admin only. 
 
 == Changelog ==
+
+= 0.1.4 =
+* Fixed a deployment issue
 
 = 0.1.3 =
 * Fixed a versioning issue #4
