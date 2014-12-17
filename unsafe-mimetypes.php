@@ -3,7 +3,7 @@
 Plugin Name: Unsafe Mimetypes
 Plugin URI: http://redmine.lukedrummond.net/projects/unsafe-mimetypes
 Description: Allows users to add file types to the whitelist of allowed media formats.  This is especially useful if you wish to distribute binaries, or specialist media formats (i.e. not just mp3, jpg and pdf)
-Version: 0.1
+Version: 0.1.2
 Author: Luke Drummond
 Author URI: https://lukedrummond.net
 License: zlib
